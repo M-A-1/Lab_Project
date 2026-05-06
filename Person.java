@@ -1,4 +1,4 @@
-package project;
+
 
 public abstract class Person {
 		

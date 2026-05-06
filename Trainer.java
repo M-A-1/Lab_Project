@@ -1,4 +1,4 @@
-package project;
+
 
 public class Trainer extends Employee implements IPayable{
 
