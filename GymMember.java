@@ -10,6 +10,14 @@ public class GymMember extends Person{
 		
 	}
 	
+	
+	//used when reading a file
+	public GymMember(String name , int id, String type , int months) {
+		super(name,id);
+		plan = new MembershipPlan( type, months );
+		
+	}
+	
 	public void displayInfo() {
 		System.out.println("Name of Member: " + name +
 				"\nID of Member: " + id +

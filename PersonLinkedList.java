@@ -84,4 +84,10 @@ public class PersonLinkedList {
         }
         return count;
     }
+    
+    
+    
+    public Node getHead() {
+    	return head;
+    }
 }

@@ -9,6 +9,13 @@ public class Employee extends Person{
 		jobTitle = jT;
 	}
 	
+	
+	//used when reading a file
+	public Employee( String name, int id , String jT) {
+		super(name , id);
+		jobTitle = jT;
+	}
+	
 	public void displayInfo() {
 		
 		System.out.println("Name of Employee: " + name +

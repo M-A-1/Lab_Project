@@ -11,6 +11,13 @@ public class Trainer extends Employee implements IPayable{
 		hoursWorked = hW;
 	}
 	
+	// used when reading a file
+	public Trainer(String name , int id , String jT , double hW , double hR ) {
+		super(name , id , jT);
+		hourlyRate = hR;
+		hoursWorked = hW;
+	}
+	
 	
 	public double calculatePayment() {
 		return hourlyRate * hoursWorked;
