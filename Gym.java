@@ -5,10 +5,18 @@ public class Gym {
 
 	private String name;
     private PersonLinkedList personList;
+    
+    // we use this to make a unique name for every gym file
+    private String fileName;
 
     public Gym(String n) {
         name = n;
         personList = new PersonLinkedList();
+        
+        /*   replace every space in the name with _ so if:
+             * gym name in main: fitness time 
+             * file name: fitness_time_gym_people.txt   */
+        fileName = name.replace(" ","_") + "gym_people.txt";
     }
 
     public boolean removePersonById(int id) {
@@ -32,7 +40,7 @@ public class Gym {
     
     
     public void saveToFile() throws IOException {
-        FileWriter writer = new FileWriter("gym_people.txt");
+        FileWriter writer = new FileWriter(fileName);
 
         Node current = personList.getHead();
 
@@ -77,7 +85,7 @@ public class Gym {
     
     
     public void loadFromFile() throws IOException {
-        File file = new File("gym_people.txt");
+        File file = new File(fileName);
 
         if (!file.exists()) {
             file.createNewFile();
