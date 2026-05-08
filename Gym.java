@@ -16,7 +16,7 @@ public class Gym {
         /*   replace every space in the name with _ so if:
              * gym name in main: fitness time 
              * file name: fitness_time_gym_people.txt   */
-        fileName = name.replace(" ","_") + "gym_people.txt";
+        fileName = name.replace(" ","_") + "_gym_people.txt";
     }
 
     public boolean removePersonById(int id) {

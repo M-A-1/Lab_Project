@@ -12,9 +12,10 @@ public abstract class Person {
 			this.id = idCounter++;
 		}
 		
-		/* we use this constructor
-		for reading a file so the counter doesn't 
-		update after we read a old Person*/
+		/* we use this constructor in 
+		  Gym class loadFromFile method
+		  for reading a file so old Id's 
+		  aren't changed*/
 		public Person(String name, int id) {
 			this.name = name;
 			this.id = id;
