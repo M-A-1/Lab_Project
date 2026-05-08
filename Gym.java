@@ -1,4 +1,5 @@
-
+import java.io.*;
+import java.util.Scanner;
 
 public class Gym {
 
@@ -27,6 +28,103 @@ public class Gym {
     public boolean searchPerson(int id) {
         return personList.search(id);
     }
+    
+    
+    
+    public void saveToFile() throws IOException {
+        FileWriter writer = new FileWriter("gym_people.txt");
+
+        Node current = personList.getHead();
+
+        while (current != null) {
+            Person p = current.getData();
+
+            if (p instanceof Trainer) {
+                Trainer t = (Trainer) p;
+
+                writer.write("Trainer," 
+                        + t.getId() + "," 
+                        + t.getName() + "," 
+                        + t.getJobTitle() + "," 
+                        + t.getHoursWorked() + "," 
+                        + t.getHourlyRate() + "\n");
+
+            } else if (p instanceof Employee) {
+                Employee e = (Employee) p;
+
+                writer.write("Employee," 
+                        + e.getId() + "," 
+                        + e.getName() + "," 
+                        + e.getJobTitle() + "\n");
+
+            } else if (p instanceof GymMember) {
+                GymMember m = (GymMember) p;
+
+                writer.write("GymMember," 
+                        + m.getId() + "," 
+                        + m.getName() + "," 
+                        + m.getPlan().getPlanType() + "," 
+                        + m.getPlan().getMonths() + "\n");
+            }
+
+            current = current.getNext();
+        }
+
+        writer.close();
+    }
+    
+    
+    
+    
+    public void loadFromFile() throws IOException {
+        File file = new File("gym_people.txt");
+
+        if (!file.exists()) {
+            file.createNewFile();
+            return;
+        }
+
+        Scanner reader = new Scanner(file);
+
+        while (reader.hasNextLine()) {
+            String line = reader.nextLine();
+
+            if (line.isEmpty()) {
+                continue;
+            }
+
+            String[] parts = line.split(",");
+
+            String type = parts[0];
+            int id = Integer.parseInt(parts[1]);
+            String name = parts[2];
+
+            if (type.equals("Employee")) {
+                String jobTitle = parts[3];
+
+                Employee employee = new Employee(name, id, jobTitle);
+                personList.add(employee);
+
+            } else if (type.equals("Trainer")) {
+                String jobTitle = parts[3];
+                double hoursWorked = Double.parseDouble(parts[4]);
+                double hourlyRate = Double.parseDouble(parts[5]);
+
+                Trainer trainer = new Trainer(name, id, jobTitle, hoursWorked, hourlyRate);
+                personList.add(trainer);
+
+            } else if (type.equals("GymMember")) {
+                String planType = parts[3];
+                int months = Integer.parseInt(parts[4]);
+
+                GymMember member = new GymMember(name, id, planType, months);
+                personList.add(member);
+            }
+        }
+
+        reader.close();
+    }
+       
 
     public void displayInfo() {
         System.out.println("-----------------------");
