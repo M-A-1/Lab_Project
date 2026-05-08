@@ -5,14 +5,19 @@ Project Requirements:
   • Your system should handle at least one checked exception and one unchecked 
 exception ( one exception is handled using try and catch in the method where it 
 occurred, the other is propagated and handled in the calling method) 
+
   • Your system should have at least one user-defined exception  (this exception 
 should serve your design ). 
+
   • Your system should support saving user input into a file and reading from a file ( 
 you should select the suitable type of files for your system: binary file, text file , 
 object file ) . 
+
   • Your GUI must have at least two frames : 
+		
     o frame for the user input. 
     o frame to display the results. 
+				
   • Your GUI must handle action events. 
   • In phase 2 , you should replace the array in phase 1 with a linked list ( you can 
 use the implementation of class node and class linked list provided in the lecture )
