@@ -21,9 +21,19 @@ public class MembershipPlan implements IPayable{
 	
 	
 	public MembershipPlan(String type , int m) {
+		//handling in the method it occurred:
+		
+		try {
+			
+			
+		if(m <= 0) {
+			throw new InvalidMonthsException("Months must be greater than 0");
+		}
+		
 		
 		months = m;
-				
+		
+		
 		if(type.equalsIgnoreCase("Premium")) {
 			basePrice = 100;
 			planType = "Premium";
@@ -37,8 +47,20 @@ public class MembershipPlan implements IPayable{
 		else {
 			throw new IllegalArgumentException("Invalid "
 					+ "membership type: " + type);
+		   }
+		
+		}catch(IllegalArgumentException e) {
+			System.out.println("Wrong Membership: " + e.getMessage());
+			basePrice = 50;        //default value
+			planType = "Normal";   //default value
 		}
 		
+		catch(InvalidMonthsException e) {
+			System.out.println("Invalid Months: " + e.getMessage());
+			basePrice = 50;        //default value
+			planType = "Normal";   //default value
+			months = 1;            //default value
+		}
 	}
 	
 	

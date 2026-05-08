@@ -1,5 +1,4 @@
-
-
+import java.io.IOException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,6 +18,18 @@ public class Main {
 
 		        Gym gym = new Gym(name);
 
+		        
+		        //handling by propagation:
+		        try {
+		        	gym.loadFromFile();
+		        }catch(IOException e) {
+		        	System.out.println("Could not load file: " + e.getMessage());
+		        }
+		        
+		        
+		        
+		        
+		        
 		        boolean button = true;
 		        int option;
 		        do {
@@ -80,6 +91,7 @@ public class Main {
 		                    int months = input.nextInt();
 		                    input.nextLine();
 
+		                    // MembershipType could cause an unchecked exception and is handled in the constructor.
 		                    GymMember member = new GymMember(MemberName, MembershipType, months);
 		                    gym.addPerson(member);
 		                    break;
@@ -105,6 +117,16 @@ public class Main {
 		                    break;
 
 		                case 7:
+		                	
+		                	//handling by propagation:
+		                	try {
+		                		gym.saveToFile();
+		                		System.out.println("Gym data saved successfully :D");
+		                	}catch(IOException e) {
+		                		System.out.println("Could not save file: " + e.getMessage()  + " :(");
+		                	}
+		                	
+		                	
 		                    System.out.println("Adios.. (Bye)");
 		                    button = false;
 		                    break;
