@@ -1,5 +1,3 @@
-
-
 public class GymMember extends Person{
 
 	private MembershipPlan plan;
@@ -26,10 +24,7 @@ public class GymMember extends Person{
 	}
 	
 	public MembershipPlan getPlan() {
-		/*we don't want someone from outside the
-		  class changing the original array so we 
-		  make a copy of the original array using 
-		  the copy constructor*/
+		/*this is done to prevent outside actions from changing the original plan*/
 		return new MembershipPlan(plan);
 	}
 	

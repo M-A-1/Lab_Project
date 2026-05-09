@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -15,6 +16,12 @@ public class Main {
 
 		        System.out.print("Gym Name: ");
 		        String name = input.nextLine();
+
+				while (name.trim().isEmpty()) {
+    				System.out.println("Gym name cannot be empty!");
+    				System.out.print("Gym Name: ");
+    				name = input.nextLine();
+				}
 
 		        Gym gym = new Gym(name);
 
@@ -44,18 +51,34 @@ public class Main {
 		            System.out.println("5) Remove Person");
 		            System.out.println("6) Display Gym Info");
 		            System.out.println("7) Exit");
+					System.out.println("8) Add Person (GUI)");
+					System.out.println("9) Display All (GUI)");	
 		            System.out.println(" ");
 		            System.out.print("---> Option Number: ");
 
-		            option = input.nextInt();
-		            input.nextLine();
+					try {
+						option = input.nextInt();
+						input.nextLine();
+					} catch (InputMismatchException e) {
+						System.out.println("Please enter a valid number!");
+						input.nextLine();
+						continue;
+					}
 		            switch (option) {
 		                case 1:
 		                    System.out.print("Enter Employee Name: ");
 		                    String EmployeeName = input.nextLine();
+							if (EmployeeName.trim().isEmpty()) {
+    								System.out.println("Employee name cannot be empty!");
+    								continue;
+								}
 
 		                    System.out.print("Enter Employee Job Title: ");
 		                    String EmployeeJob = input.nextLine();
+							if (EmployeeJob.trim().isEmpty()) {
+								System.out.println("Employee job title cannot be empty!");
+								continue;
+							}
 
 		                    Employee employee = new Employee(EmployeeName, EmployeeJob);
 		                    gym.addPerson(employee);
@@ -64,10 +87,19 @@ public class Main {
 		                case 2:
 		                    System.out.print("Enter Trainer Name: ");
 		                    String TrainerName = input.nextLine();
+							if (TrainerName.trim().isEmpty()) {
+    								System.out.println("Trainer name cannot be empty!");
+    								continue;
+							}
 
 		                    System.out.print("Enter Trainer Job Title: ");
 		                    String TrainerJob = input.nextLine();
-
+							if (TrainerJob.trim().isEmpty()) {
+								System.out.println("Trainer job title cannot be empty!");
+								continue;
+							}
+		                    
+							try {
 		                    System.out.print("Enter Hourly Rate: ");
 		                    double HourlyRate = input.nextDouble();
 		                    input.nextLine();
@@ -76,8 +108,19 @@ public class Main {
 		                    double HoursWorked = input.nextDouble();
 		                    input.nextLine();
 
+							if (HoursWorked <= 0 || HourlyRate <= 0) {
+								System.out.println("Hourly rate and hours worked must be positive");
+								continue; 
+							}
+
 		                    Trainer trainer = new Trainer(TrainerName, TrainerJob, HoursWorked, HourlyRate);
 		                    gym.addPerson(trainer);
+						}
+						catch(InputMismatchException e) {
+							System.out.println("Hourly Rate and Hours Worked should be numbers!");
+							input.nextLine();
+							continue;
+						}
 		                    break;
 
 		                case 3:
@@ -88,28 +131,67 @@ public class Main {
 		                    String MembershipType = input.nextLine();
 
 		                    System.out.print("Enter Number of Months: ");
-		                    int months = input.nextInt();
-		                    input.nextLine();
+							try {
+								int months = input.nextInt();
+								input.nextLine();
 
-		                    // MembershipType could cause an unchecked exception and is handled in the constructor.
-		                    GymMember member = new GymMember(MemberName, MembershipType, months);
-		                    gym.addPerson(member);
+								if (MemberName.trim().isEmpty()) {
+    								System.out.println("Member name cannot be empty!");
+    								continue;
+								}
+
+								if (MembershipType.trim().isEmpty()) {
+    								System.out.println("Membership type cannot be empty!");
+    								continue;
+								}
+								// MembershipType could cause an unchecked exception and is handled in the constructor.
+								GymMember member = new GymMember(MemberName, MembershipType, months);
+								gym.addPerson(member);
+							} catch (InputMismatchException e) {
+								System.out.println("Please enter a valid number!");
+								input.nextLine();
+								continue;
+							}
+		                    
 		                    break;
 
 		                case 4:
 		                    System.out.print("Enter The Person's ID: ");
-		                    int searchId = input.nextInt();
-		                    input.nextLine();
+							try {
+								int searchId = input.nextInt();
+								input.nextLine();
 
-		                    gym.searchPerson(searchId);
+								if (searchId <= 0) {
+									System.out.println("ID should be greater than 0!");
+									continue;
+								}
+
+								gym.searchPerson(searchId);
+							} catch (InputMismatchException e) {
+								System.out.println("ID should be a number!");
+								input.nextLine();
+								continue;
+							}
+		                    
 		                    break;
 
 		                case 5:
 		                    System.out.print("Enter The Person's ID: ");
-		                    int id = input.nextInt();
-		                    input.nextLine();
+		                    try {
+								int id = input.nextInt();
+								input.nextLine();
 
-		                    gym.removePersonById(id);
+								if (id <= 0) {
+									System.out.println("ID should be greater than 0!");
+									continue;
+								}
+								gym.removePersonById(id);
+							} catch (InputMismatchException e) {
+								System.out.println("ID should be a number!");
+								input.nextLine();
+								continue;
+							}
+
 		                    break;
 
 		                case 6:
@@ -130,6 +212,13 @@ public class Main {
 		                    System.out.println("Adios.. (Bye)");
 		                    button = false;
 		                    break;
+							
+						case 8:
+							new AddPersonGUI(gym); //calling the GUI to add a person
+							break;
+						case 9:
+							new DisplayAllGUI(gym); //calling the GUI to display all people
+							break;
 
 		                default:
 		                    System.out.println("Invalid option");

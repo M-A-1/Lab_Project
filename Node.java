@@ -1,4 +1,3 @@
-
 public class Node {
 
 	private Person data;
@@ -25,6 +24,7 @@ public class Node {
         this.next = next;
     }
 }
+
 
 
 

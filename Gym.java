@@ -148,6 +148,7 @@ public class Gym {
 
     public void setName(String name) {
         this.name = name;
+        fileName = name.replace(" ", "_") + "_gym_people.txt";
     }
 
     public PersonLinkedList getPersonList() {

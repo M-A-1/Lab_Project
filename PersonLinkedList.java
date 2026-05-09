@@ -1,4 +1,3 @@
-
 public class PersonLinkedList {
 
 	private Node head;

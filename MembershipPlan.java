@@ -1,5 +1,3 @@
-
-
 public class MembershipPlan implements IPayable{
 
 	private String planType;
@@ -41,14 +39,13 @@ public class MembershipPlan implements IPayable{
 		
 		else {
 			
-			throw new IllegalArgumentException("Invalid "
-					+ "membership type: " + type);
+			throw new IllegalArgumentException("Invalid membership type setting default value to Normal.");
 		   }
 		
 		}
 		
 		catch(IllegalArgumentException e) {
-			System.out.println("Wrong Membership: " + e.getMessage());
+			System.out.println(e.getMessage());
 			basePrice = 50;        //default value
 			planType = "Normal";   //default value
 		}
@@ -59,7 +56,7 @@ public class MembershipPlan implements IPayable{
 			
 			
 			if(m <= 0) {
-				throw new InvalidMonthsException("Months must be greater than 0");
+				throw new InvalidMonthsException("Invalid number of months setting default value to 1 month.");
 			}
 			
 			
@@ -68,7 +65,7 @@ public class MembershipPlan implements IPayable{
 			}
 			
 			catch(InvalidMonthsException e) {
-				System.out.println("Invalid Months: " + e.getMessage());
+				System.out.println(e.getMessage());
 				months = 1;            //default value
 			}
 		
