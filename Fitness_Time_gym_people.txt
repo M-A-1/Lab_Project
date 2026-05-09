@@ -1,5 +1,0 @@
-Trainer,1000,Mishal,modeer,50.0,13.0
-Trainer,1001,Mishal,modeer,50.0,13.0
-Trainer,1002,Mishal,modeer,50.0,13.0
-GymMember,1003,Mishal,Normal,1
-Employee,1004,Mtfft,gfx
